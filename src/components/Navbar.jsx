@@ -1,7 +1,9 @@
 import { GoKeyboard } from "react-icons/go"
 import { AiOutlineShoppingCart } from "react-icons/ai"
+import { useState } from "react"
 
-const Navbar = () => {
+const Navbar = (props) => {
+
   const headerItem = [
     {
       name: "Home",
@@ -16,6 +18,7 @@ const Navbar = () => {
       path: "/Contact",
     },
   ]
+
 
   return (
     <nav className="bg-rose-500 p-8 box-border">
@@ -32,7 +35,7 @@ const Navbar = () => {
           <ul className="pr-36 flex gap-6 text-2xl">
             {headerItem.map((item) => {
               return (
-                <li className="hover:scale-110 hover:transition-transform">
+                <li key={item.name} className="hover:scale-110 hover:transition-transform">
                   <a href={item.path}>{item.name}</a>
                 </li>
               )
@@ -41,12 +44,12 @@ const Navbar = () => {
           <div className="hover:scale-110 hover:transition-transform">
             <a href="/" className="relative ">
               <AiOutlineShoppingCart className="bg-white h-16 w-16 p-4 mr-12 text-black rounded-full" />
-              <a
+              <p
                 className="absolute bg-white rounded-full border-2 border-rose-300 text-rose-500 w-8 h-8 
                 bottom-0 left-[-12px] text-center pt-1"
               >
-                1
-              </a>
+                {props.cartNumber}
+              </p>
             </a>
           </div>
         </div>
