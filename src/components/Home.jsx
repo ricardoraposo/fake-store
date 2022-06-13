@@ -6,7 +6,7 @@ const Home = () => {
         <div className="flex flex-1 flex-col items-start px-12">
           <p className="text-2xl mb-6 text-rose-300">World's Greatest keyboard manufacturer</p>
           <h2 className="text-5xl font-bold mb-6 leading-normal">
-            Enhancing Performance, Through <spam className="text-rose-500">Ergonomics</spam>
+            Enhancing Performance, Through <span className="text-rose-500">Ergonomics</span>
           </h2>
           <a
             href="/Products"

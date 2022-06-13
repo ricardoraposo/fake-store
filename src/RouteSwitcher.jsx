@@ -8,12 +8,31 @@ const RouteSwitcher = () => {
   const [cartNumber, setCartNumber] = useState(0)
   const [shoppingCart, setShoppingCart] = useState([])
 
-  const changeCartNumber = (p) => {
-    setShoppingCart(shoppingCart.concat(p))
+  const addToCart = (p) => {
+    const isThere = shoppingCart.some((i) => {
+      return i.name === p.name
+    })
+
+    if (isThere) {
+      setShoppingCart(
+        shoppingCart.map((item) => {
+          if (item.name === p.name) {
+            return {
+              ...item,
+              quantity: item.quantity + 1,
+            }
+          } else {
+            return { ...item }
+          }
+        })
+      )
+    } else {
+      setShoppingCart(shoppingCart.concat(p))
+    }
   }
 
-  useEffect(() =>{
-    setCartNumber(shoppingCart.length)
+  useEffect(() => {
+    setCartNumber(shoppingCart.reduce((acc, i) => acc + i.quantity, 0))
     console.log(shoppingCart)
   })
 
@@ -23,7 +42,10 @@ const RouteSwitcher = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Products" element={<Products clickHandler={changeCartNumber} />} />
+          <Route
+            path="/Products"
+            element={<Products clickHandler={addToCart} />}
+          />
         </Routes>
       </BrowserRouter>
     </div>
