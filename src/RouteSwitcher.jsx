@@ -44,7 +44,7 @@ const RouteSwitcher = () => {
           <Route path="/" element={<Home />} />
           <Route
             path="/Products"
-            element={<Products clickHandler={addToCart} />}
+            element={<Products clickHandler={addToCart} shoppingCart={shoppingCart}/>}
           />
         </Routes>
       </BrowserRouter>
