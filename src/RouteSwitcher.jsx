@@ -9,6 +9,47 @@ const RouteSwitcher = () => {
   const [cartNumber, setCartNumber] = useState(0)
   const [shoppingCart, setShoppingCart] = useState([])
 
+  const removeFromCart = (p) => {
+    setShoppingCart(shoppingCart.filter(i => {
+      return p.name !== i.name
+    }))
+  }
+
+  const addItem = (p) => {
+    setShoppingCart(
+      shoppingCart.map((item) => {
+        if (item.name === p.name) {
+          return {
+            ...item,
+            quantity: item.quantity + 1,
+          }
+        } else {
+          return { ...item }
+        }
+      })
+    )
+  }
+
+
+  const removeItem = (p) => {
+    setShoppingCart(
+      shoppingCart.map((item) => {
+        if (item.name === p.name) {
+          if (item.quantity > 1) {
+            return {
+              ...item,
+              quantity: item.quantity - 1,
+            }
+          } else {
+            return {}
+          }
+        } else {
+          return { ...item }
+        }
+      })
+    )
+  }
+
   const addToCart = (p) => {
     const isThere = shoppingCart.some((i) => {
       return i.name === p.name
@@ -42,11 +83,11 @@ const RouteSwitcher = () => {
 
   return (
     <div className="font-Poppins h-screen bg-rose-100">
-      <ShoppingCart shoppingCart={shoppingCart}/>
+      <ShoppingCart shoppingCart={shoppingCart} addItem={addItem} removeItem={removeItem} />
       <Navbar cartNumber={cartNumber} />
       <BrowserRouter className="relative">
         <Routes>
-          <Route path="/" element={<Home  />} />
+          <Route path="/" element={<Home />} />
           <Route
             path="/Products"
             element={<Products clickHandler={addToCart} />}
