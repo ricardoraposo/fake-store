@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import Navbar from "./components/Navbar"
 import Home from "./components/Home"
 import Products from "./components/Products"
+import ShoppingCart from "./components/ShoppingCart"
 
 const RouteSwitcher = () => {
   const [cartNumber, setCartNumber] = useState(0)
@@ -32,19 +33,23 @@ const RouteSwitcher = () => {
   }
 
   useEffect(() => {
-    setCartNumber(shoppingCart.reduce((acc, i) => acc + i.quantity, 0))
+    setCartNumber(
+      shoppingCart.reduce((acc, i) => acc + i.quantity, 0),
+      shoppingCart
+    )
     console.log(shoppingCart)
   })
 
   return (
     <div className="font-Poppins h-screen bg-rose-100">
+      <ShoppingCart shoppingCart={shoppingCart}/>
       <Navbar cartNumber={cartNumber} />
-      <BrowserRouter>
+      <BrowserRouter className="relative">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home  />} />
           <Route
             path="/Products"
-            element={<Products clickHandler={addToCart} shoppingCart={shoppingCart}/>}
+            element={<Products clickHandler={addToCart} />}
           />
         </Routes>
       </BrowserRouter>

@@ -1,5 +1,4 @@
 import { productArray } from "./utils/utils"
-import ShoppingCart from './ShoppingCart'
 
 const Products = (props) => {
 
@@ -16,7 +15,6 @@ const Products = (props) => {
           </button>
         )
       })}
-      <ShoppingCart shoppingCart={props.shoppingCart} />
     </div>
   )
 }
